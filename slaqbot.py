@@ -1,7 +1,6 @@
 import logging
 
-logging.basicConfig(level=logging.ERROR)
-import time
+logging.basicConfig(level=logging.INFO)
 import os
 import asyncio
 import concurrent.futures
@@ -13,9 +12,10 @@ load_dotenv()
 SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
 SLACK_APP_TOKEN = os.environ['SLACK_APP_TOKEN']
 
-app = AsyncApp(token=os.environ["SLACK_BOT_TOKEN"])
+app = AsyncApp(token=SLACK_BOT_TOKEN)
 
 from openai import OpenAI
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
 ASSISTANT_ID = os.environ["ASSISTANT_ID"]
 
 # Handle non-slash command events
@@ -87,11 +87,9 @@ async def send_dm(user_id, channel_id, response):
 
 
 async def main():
-    handler = AsyncSocketModeHandler(app, os.environ["SLACK_APP_TOKEN"])
+    handler = AsyncSocketModeHandler(app, SLACK_APP_TOKEN)
     await handler.start_async()
 
 
 if __name__ == "__main__":
-    import asyncio
-
     asyncio.run(main())
