@@ -1,0 +1,24 @@
+# generated via LLM for example purposes
+FAQs:
+  - Title: Can I use Nmap for network scanning?
+    Question: \
+      I want to do some basic network scanning to understand our infrastructure better. Is it okay if I use Nmap or similar network scanners?
+    Answer: \
+      While you need an IT ticket and exception to have binaries such as nmap installed on your company device, network scanners can be used in a safe,
+      non-disruptive manner with proper authorization. Scanning should be done using techniques like ping sweeps and version detection, not brute force methods.
+      For example, a scan using "nmap -sn 192.168.1.0/24" to ping each host would be acceptable. But brute force scanning of ports or services is prohibited without permission. 
+      Please contact the infosec team to discuss appropriate use cases if you need to actively scan internal networks.
+
+  - Title: Is Burp Suite allowed?
+    Question: \
+      I'd like to do some web app testing as part of my job. Can I use Burp Suite or other web proxies to intercept traffic?
+    Answer: \
+      Burp Suite and other intercepting proxies are not permitted without prior authorization. While these tools are useful for web app testing,
+      they can also be used maliciously. Please submit a request to IT and infosec if you require the use of Burp Suite or similar tools.
+  
+  - Title: Can I use vulnerability exploitation tools?
+    Question: \
+      Are we allowed to use exploit frameworks like Metasploit or tools that exploit vulnerabilities without explicit permission?
+    Answer: \
+      No. The use of exploitation tools like Metasploit, sqlmap, and others is strictly prohibited without proper authorization.
+      Ethically exploiting live systems can be illegal and destructive. Please submit requests for approval before using any tools that exploit vulnerabilities.
