@@ -25,7 +25,6 @@ async def event_test(event, say):
 
 @app.event("message")
 async def handle_message_events(event, say):
-    print(event)
     await say(f"Hi there, <@{event['user']}>! Please use the /faq command to ask me a question.")
 
 # Handle proper slash command events
@@ -61,6 +60,7 @@ async def ask_llm(payload):
             thread_id=thread.id,
             assistant_id=ASSISTANT_ID,
         ))
+        # TODO: once assistant api is out of beta hopefully there is a better way to figure out when the run is completed
         await asyncio.sleep(2)
         while True:
             run = await loop.run_in_executor(pool, lambda: client.beta.threads.runs.retrieve(
@@ -76,13 +76,13 @@ async def ask_llm(payload):
         response = (messages.data[0].content[0].text.value)
         return response
 
+# Function to send ephemeral message back to user with the answer
 async def send_dm(user_id, channel_id, response):
-        # Call the conversations.list method using the WebClient
         await app.client.chat_postEphemeral(
             user=user_id,
             channel=channel_id,
             text=response
-            # You could also use a blocks[] array to send richer content
+            # TODO: use a blocks[] array to send richer content
         )
 
 

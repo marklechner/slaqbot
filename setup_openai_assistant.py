@@ -36,7 +36,6 @@ def list_assistants(client):
     )
     print(my_assistants.data)
 
-# Main program
 if __name__ == "__main__":
     #create_assistant(client)
     #create_file(client)
