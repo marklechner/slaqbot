@@ -3,9 +3,9 @@
 
 ![Demo GIF](./demo.gif)
 
-This is a Slack bot that uses the OpenAI API to answer questions. It listens for a command in Slack, sends the command text to the OpenAI API, and then sends the API's response back to the user in a direct ephemeral message, so no matter the channel.
+This is a Slack bot that uses websocket, async execution and OpenAI API to answer questions. It listens for a command in Slack, sends the command text to the OpenAI API, and then sends the API's response back to the user in a direct ephemeral message.
 
-Regardless of the channel where the `/faq` command is issued form, both question and answer will only be visible for the given user on the given device until the next restart of the application. This is nice because it will not get logged or pollute channel/history.
+Regardless of the channel where the `/faq` command is issued from, both question and answer will only be visible for the given user on the given device until the next restart of the application. This is nice because it will not get logged or pollute channel/history.
 
 ## How it works
 
