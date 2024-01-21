@@ -1,0 +1,67 @@
+[
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Question:*"
+		}
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "_{question}_"
+		}
+	},
+	{
+		"type": "divider"
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Answer:*"
+		}
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "_{answer}_"
+		}
+	},
+	{
+		"type": "divider"
+	},
+	{
+		"type": "section",
+		"text": {
+			"type": "mrkdwn",
+			"text": "*Feedback:*"
+		}
+	},
+	{
+		"type": "actions",
+		"elements": [
+			{
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": ":thumbsup:",
+					"emoji": true
+				},
+				"value": "click_me_123"
+			},
+			{
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": ":thumbsdown:",
+					"emoji": true
+				},
+				"value": "click_me_123",
+				"url": "https://google.com"
+			}
+		]
+	}
+]

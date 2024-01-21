@@ -2,6 +2,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 import os
+import json
 import asyncio
 import concurrent.futures
 from slack_bolt.app.async_app import AsyncApp
@@ -11,6 +12,9 @@ from dotenv import load_dotenv
 load_dotenv()
 SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
 SLACK_APP_TOKEN = os.environ['SLACK_APP_TOKEN']
+with open('answer_blocks.json', 'r') as f:
+    blocks = f.read()
+ANSWER_BLOCKS_TEMPLATE = blocks
 
 app = AsyncApp(token=SLACK_BOT_TOKEN)
 
@@ -36,13 +40,13 @@ async def faq_command(ack, body):
         await ack(f"{response}")
     else:
         asyncio.create_task(handle_faq(body))
-        response = "Let me see if I can answer that..."
+        response = f"*Your question:* _{body['text']}_ \nLet me see if I can answer that..."
         await ack(f"{response}")
 
 # Function to take slack message, get an answer from OpenAI and send DM back to user with the answer
 async def handle_faq(body):
     response = await ask_llm(body['text'])
-    await send_dm(body['user_id'], body['channel_id'], response)
+    await send_dm(body['user_id'], body['channel_id'],body['text'], response)
 
 # Function to get answer to question from OpenAI assistant
 async def ask_llm(payload):
@@ -77,12 +81,15 @@ async def ask_llm(payload):
         return response
 
 # Function to send ephemeral message back to user with the answer
-async def send_dm(user_id, channel_id, response):
+async def send_dm(user_id, channel_id, question, response):
+        # substitute question and answer into blocks template
+        blocks = str(ANSWER_BLOCKS_TEMPLATE).replace("{question}", question).replace("{answer}", response)
+        blocks = json.loads(blocks)
         await app.client.chat_postEphemeral(
+            blocks=blocks,
             user=user_id,
             channel=channel_id,
-            text=response
-            # TODO: use a blocks[] array to send richer content
+            text="Here is what I found in the FAQ: _response_"
         )
 
 
